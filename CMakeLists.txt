@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.24) # CMakePresets are supported since version 3.21
 
-project(cpp_proj_template
-        VERSION 0.1.0
+project(vcpkg_manifest_example_proj
+        VERSION 1.0.0
         LANGUAGES CXX)
 
 # Make all modules available to this project and other projects that consume this project by
@@ -37,8 +37,15 @@ if (${PROJECT_NAME}_USE_SCCACHE)
     enable_sccache()
 endif ()
 
-# Use find_package to find dependencies that are installed on the system
-# Example:
-# find_package(Boost REQUIRED)
+find_package(fmt CONFIG REQUIRED)
+find_package(range-v3 CONFIG REQUIRED)
+find_package(cxxopts CONFIG REQUIRED)
+
+add_executable(fibo main.cpp)
+target_link_libraries(fibo
+        PRIVATE
+        fmt::fmt
+        range-v3::range-v3
+        cxxopts::cxxopts)
 
 
